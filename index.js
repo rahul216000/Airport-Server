@@ -25,6 +25,10 @@ app.post("/", async (req, res) => {
 
 })
 
+app.get("/", (req, res) => {
+    res.send("Not Allowed")
+})
+
 
 
 async function CityNameByQuery(query) {
