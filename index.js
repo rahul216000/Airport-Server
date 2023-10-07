@@ -16,18 +16,22 @@ app.use(express.json())
 
 app.post("/", async (req, res) => {
     let query = req.body.query;
+    let count = req.body.count;
     let FilteredCity = await CityNameByQuery(query)
     let FilterAirportsAndNumberofCities = await AirportsNameByCity(FilteredCity)
     let FilterAirports = FilterAirportsAndNumberofCities[0]
     let NumberOnCities = FilterAirportsAndNumberofCities[1]
 
-    console.log(query);
-    console.log(FilteredCity);
+    // console.log(query);
+    // console.log(count);
+    // console.log(FilteredCity);
 
-    res.json({ CityArray: FilteredCity, AirportsArr: FilterAirports, NumberOnCitiesArr: NumberOnCities });
+    res.json({ countNo:count, CityArray: FilteredCity, AirportsArr: FilterAirports, NumberOnCitiesArr: NumberOnCities });
 
 })
 
+// Francesca.smith@topjet.aero
+// Topjet2023!
 app.get("/", (req, res) => {
     res.send("Not Allowed")
 })
