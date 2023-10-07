@@ -21,6 +21,9 @@ app.post("/", async (req, res) => {
     let FilterAirports = FilterAirportsAndNumberofCities[0]
     let NumberOnCities = FilterAirportsAndNumberofCities[1]
 
+    console.log(query);
+    console.log(FilteredCity);
+
     res.json({ CityArray: FilteredCity, AirportsArr: FilterAirports, NumberOnCitiesArr: NumberOnCities });
 
 })
