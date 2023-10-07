@@ -22,7 +22,7 @@ app.post("/", async (req, res) => {
     let FilterAirports = FilterAirportsAndNumberofCities[0]
     let NumberOnCities = FilterAirportsAndNumberofCities[1]
 
-    // console.log(query);
+    console.log(query);
     // console.log(count);
     // console.log(FilteredCity);
 
