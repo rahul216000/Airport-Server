@@ -5,7 +5,7 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 const EmailUser = require("../Messages/SendEmailForUser")
 
-const DB = "mongodb+srv://user:misty8520@cluster0.m19xvho.mongodb.net/Request?retryWrites=true&w=majority";
+const DB = process.env.DATABASE;
 mongoose.set("strictQuery", false);
 mongoose.connect(DB).then(() => {
     console.log('Connected');
@@ -15,7 +15,6 @@ const Flight = mongoose.model('Flights', {
     contact: { type: Object },
     flight: { type: Array }
 });
-
 
 router.post("/get-quote", async (req, res) => {
     let flightinfo = req.body.flight;
