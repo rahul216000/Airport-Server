@@ -19,6 +19,7 @@ app.use(cors({
 app.use(express.json())
 app.use(require('./Router/SearchFeature'));
 app.use(require('./Router/RequestFeature'));
+app.use(require('./Router/Admin'));
 
 
 // Francesca.smith@topjet.aero

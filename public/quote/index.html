@@ -1,0 +1,1041 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+        :root {
+            --c-text-primary: #282a32;
+            --c-text-secondary: #686b87;
+            --c-text-action: #404089;
+            --c-accent-primary: #434ce8;
+            --c-border-primary: #eff1f6;
+            --c-background-primary: #ffffff;
+            --c-background-secondary: #fdfcff;
+            --c-background-tertiary: #ecf3fe;
+            --c-background-quaternary: #e9ecf4;
+        }
+
+        body {
+            line-height: 1.5;
+            min-height: 100vh;
+            font-family: "Be Vietnam Pro", sans-serif;
+            background-color: var(--c-background-secondary);
+            color: var(--c-text-primary);
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        :focus {
+            outline: 0;
+        }
+
+        .responsive-wrapper {
+            width: 90%;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            height: 80px;
+            border-bottom: 1px solid var(--c-border-primary);
+            background-color: var(--c-background-primary);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-content>a {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .header-content {
+                justify-content: space-between;
+            }
+
+            .header-content>a {
+                display: inline-flex;
+            }
+        }
+
+        .header-logo {
+            margin-right: 2.5rem;
+        }
+
+        .header-logo a {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo a div {
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .header-logo a div:after {
+            display: block;
+            content: "";
+            position: absolute;
+            left: 0;
+            top: auto;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            height: 50%;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.2);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+        }
+
+        .header-navigation {
+            display: flex;
+            flex-grow: 1;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 1200px) {
+            .header-navigation {
+                display: none;
+            }
+        }
+
+        .header-navigation-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-navigation-links a {
+            text-decoration: none;
+            color: var(--c-text-action);
+            font-weight: 500;
+            transition: 0.15s ease;
+        }
+
+        .header-navigation-links a+* {
+            margin-left: 1.5rem;
+        }
+
+        .header-navigation-links a:hover,
+        .header-navigation-links a:focus {
+            color: var(--c-accent-primary);
+        }
+
+        .header-navigation-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-navigation-actions>.avatar {
+            margin-left: 0.75rem;
+        }
+
+        .header-navigation-actions>.icon-button+.icon-button {
+            margin-left: 0.25rem;
+        }
+
+        .header-navigation-actions>.button+.icon-button {
+            margin-left: 1rem;
+        }
+
+        .button {
+            font: inherit;
+            color: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1em;
+            height: 40px;
+            border-radius: 8px;
+            line-height: 1;
+            border: 2px solid var(--c-border-primary);
+            color: var(--c-text-action);
+            font-size: 0.875rem;
+            transition: 0.15s ease;
+            background-color: var(--c-background-primary);
+        }
+
+        .button i {
+            margin-right: 0.5rem;
+            font-size: 1.25em;
+        }
+
+        .button span {
+            font-weight: 500;
+        }
+
+        .button:hover,
+        .button:focus {
+            border-color: var(--c-accent-primary);
+            color: var(--c-accent-primary);
+        }
+
+        .icon-button {
+            font: inherit;
+            color: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            color: var(--c-text-action);
+            transition: 0.15s ease;
+        }
+
+        .icon-button i {
+            font-size: 1.25em;
+        }
+
+        .icon-button:focus,
+        .icon-button:hover {
+            background-color: var(--c-background-tertiary);
+            color: var(--c-accent-primary);
+        }
+
+        .avatar {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .main {
+            padding-top: 3rem;
+        }
+
+        .main-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .main-header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        @media (max-width: 550px) {
+            .main-header h1 {
+                margin-bottom: 1rem;
+            }
+        }
+
+        .search {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        .search input {
+            font: inherit;
+            color: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1em 0 36px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid var(--c-border-primary);
+            color: var(--c-text-action);
+            font-size: 0.875rem;
+            transition: 0.15s ease;
+            width: 100%;
+            line-height: 1;
+        }
+
+        .search input::-moz-placeholder {
+            color: var(--c-text-action);
+        }
+
+        .search input:-ms-input-placeholder {
+            color: var(--c-text-action);
+        }
+
+        .search input::placeholder {
+            color: var(--c-text-action);
+        }
+
+        .search input:focus,
+        .search input:hover {
+            border-color: var(--c-accent-primary);
+        }
+
+        .search button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            background-color: transparent;
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.25em;
+            color: var(--c-text-action);
+            padding: 0;
+            height: 40px;
+        }
+
+        .horizontal-tabs {
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 1000px) {
+            .horizontal-tabs {
+                scrollbar-width: none;
+                position: relative;
+            }
+
+            .horizontal-tabs::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .horizontal-tabs a {
+            display: inline-flex;
+            flex-shrink: 0;
+            align-items: center;
+            height: 48px;
+            padding: 0 0.25rem;
+            font-weight: 500;
+            color: inherit;
+            border-bottom: 3px solid transparent;
+            text-decoration: none;
+            transition: 0.15s ease;
+        }
+
+        .horizontal-tabs a:hover,
+        .horizontal-tabs a:focus,
+        .horizontal-tabs a.active {
+            color: var(--c-accent-primary);
+            border-bottom-color: var(--c-accent-primary);
+        }
+
+        .horizontal-tabs a+* {
+            margin-left: 1rem;
+        }
+
+        .content-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 3rem;
+            margin-top: -1px;
+            border-top: 1px solid var(--c-border-primary);
+        }
+
+        .content-header-intro h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .content-header-intro p {
+            color: var(--c-text-secondary);
+            margin-top: 0.25rem;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 800px) {
+            .content-header-actions a:first-child {
+                display: none;
+            }
+        }
+
+        .content {
+            border-top: 1px solid var(--c-border-primary);
+            margin-top: 2rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .content-panel {
+            display: none;
+            max-width: 280px;
+            width: 25%;
+            padding: 2rem 1rem 2rem 0;
+            margin-right: 3rem;
+        }
+
+        @media (min-width: 800px) {
+            .content-panel {
+                display: block;
+            }
+        }
+
+        .vertical-tabs {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vertical-tabs a {
+            display: flex;
+            align-items: center;
+            padding: 0.75em 1em;
+            background-color: transparent;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            color: var(--c-text-action);
+            transition: 0.15s ease;
+        }
+
+        .vertical-tabs a:hover,
+        .vertical-tabs a:focus,
+        .vertical-tabs a.active {
+            background-color: var(--c-background-tertiary);
+            color: var(--c-accent-primary);
+        }
+
+        .vertical-tabs a+* {
+            margin-top: 0.25rem;
+        }
+
+        .content-main {
+            padding-top: 2rem;
+            padding-bottom: 6rem;
+            flex-grow: 1;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            -moz-column-gap: 1.5rem;
+            column-gap: 1.5rem;
+            row-gap: 1.5rem;
+        }
+
+        @media (min-width: 600px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .card-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .card {
+            background-color: var(--c-background-primary);
+            box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05), 0 5px 15px 0 rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 1.5rem 1.25rem 1rem 1.25rem;
+        }
+
+        .card-header div {
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header div span {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-header div span img {
+            max-height: 100%;
+        }
+
+        .card-header div h3 {
+            margin-left: 0.75rem;
+            font-weight: 500;
+        }
+
+        .toggle span {
+            display: block;
+            width: 40px;
+            height: 24px;
+            border-radius: 99em;
+            background-color: var(--c-background-quaternary);
+            box-shadow: inset 1px 1px 1px 0 rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: 0.15s ease;
+        }
+
+        .toggle span:before {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            height: 18px;
+            width: 18px;
+            background-color: var(--c-background-primary);
+            border-radius: 50%;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+            transition: 0.15s ease;
+        }
+
+        .toggle input {
+            clip: rect(0 0 0 0);
+            -webkit-clip-path: inset(50%);
+            clip-path: inset(50%);
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap;
+            width: 1px;
+        }
+
+        .toggle input:checked+span {
+            background-color: var(--c-accent-primary);
+        }
+
+        .toggle input:checked+span:before {
+            transform: translateX(calc(100% - 2px));
+        }
+
+        .toggle input:focus+span {
+            box-shadow: 0 0 0 4px var(--c-background-tertiary);
+        }
+
+        .card-body {
+            padding: 1rem 1.25rem;
+            font-size: 0.875rem;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border-top: 1px solid var(--c-border-primary);
+        }
+
+        .card-footer a {
+            color: var(--c-text-action);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        html::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        html::-webkit-scrollbar-thumb {
+            background-color: var(--c-text-primary);
+            border: 4px solid var(--c-background-primary);
+            border-radius: 99em;
+        }
+
+
+        .ag-format-container {
+            width: 1142px;
+            margin: 0 auto;
+        }
+
+
+        /* body {
+  background-color: #000;
+} */
+        .ag-courses_box {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: start;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+
+            padding: 50px 0;
+        }
+
+        .ag-courses_item {
+            -ms-flex-preferred-size: calc(33.33333% - 30px);
+            flex-basis: calc(33.33333% - 30px);
+
+            margin: 0 15px 30px;
+
+            overflow: hidden;
+
+            border-radius: 28px;
+        }
+
+        .ag-courses-item_link {
+            display: block;
+            padding: 30px 20px;
+            background-color: #121212;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .ag-courses-item_link:hover,
+        .ag-courses-item_link:hover .ag-courses-item_date {
+            text-decoration: none;
+            color: #FFF;
+        }
+
+        .ag-courses-item_link:hover .ag-courses-item_bg {
+            -webkit-transform: scale(10);
+            -ms-transform: scale(10);
+            transform: scale(10);
+        }
+
+        .ag-courses-item_title {
+            min-height: 87px;
+            margin: 0 0 25px;
+
+            overflow: hidden;
+
+            font-weight: bold;
+            font-size: 30px;
+            color: #FFF;
+
+            z-index: 2;
+            position: relative;
+        }
+
+        .ag-courses-item_date-box {
+            font-size: 18px;
+            color: #FFF;
+
+            z-index: 2;
+            position: relative;
+        }
+
+        .ag-courses-item_date {
+            font-weight: bold;
+            color: #f9b234;
+
+            -webkit-transition: color .5s ease;
+            -o-transition: color .5s ease;
+            transition: color .5s ease
+        }
+
+        .ag-courses-item_bg {
+            height: 128px;
+            width: 128px;
+            background-color: #f9b234;
+
+            z-index: 1;
+            position: absolute;
+            top: -75px;
+            right: -75px;
+
+            border-radius: 50%;
+
+            -webkit-transition: all .5s ease;
+            -o-transition: all .5s ease;
+            transition: all .5s ease;
+        }
+
+        .ag-courses_item:nth-child(2n) .ag-courses-item_bg {
+            background-color: #3ecd5e;
+        }
+
+        .ag-courses_item:nth-child(3n) .ag-courses-item_bg {
+            background-color: #e44002;
+        }
+
+        .ag-courses_item:nth-child(4n) .ag-courses-item_bg {
+            background-color: #952aff;
+        }
+
+        .ag-courses_item:nth-child(5n) .ag-courses-item_bg {
+            background-color: #cd3e94;
+        }
+
+        .ag-courses_item:nth-child(6n) .ag-courses-item_bg {
+            background-color: #4c49ea;
+        }
+
+
+
+        @media only screen and (max-width: 979px) {
+            .ag-courses_item {
+                -ms-flex-preferred-size: calc(50% - 30px);
+                flex-basis: calc(50% - 30px);
+            }
+
+            .ag-courses-item_title {
+                font-size: 24px;
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .ag-format-container {
+                width: 96%;
+            }
+
+        }
+
+        @media only screen and (max-width: 639px) {
+            .ag-courses_item {
+                -ms-flex-preferred-size: 100%;
+                flex-basis: 100%;
+            }
+
+            .ag-courses-item_title {
+                min-height: 72px;
+                line-height: 1;
+
+                font-size: 24px;
+            }
+
+            .ag-courses-item_link {
+                padding: 22px 40px;
+            }
+
+            .ag-courses-item_date-box {
+                font-size: 16px;
+            }
+        }
+
+
+
+        .SecondMain {
+            inline-size: min(60rem, 100% - var(--page-gutter) * 2);
+            margin: 4rem auto;
+        }
+
+        .wrapper {
+            display: flex;
+            overscroll-behavior-x: contain;
+            overflow-x: auto;
+            margin-inline: calc(var(--page-gutter) * -1);
+            padding-inline: var(--page-gutter);
+            padding-block: 1rem;
+        }
+
+        h1 {
+            line-height: 1.2;
+        }
+
+        table {
+            border-spacing: 0;
+            overflow: hidden;
+            inline-size: 100%;
+            text-align: left;
+            background-color: inherit;
+            border: 1px solid lightgray;
+            border-radius: 0.5rem;
+            box-shadow: 0px 4px 6px -2px rgba(14, 30, 37, 0.12);
+        }
+
+        :is(th, td) {
+            padding: 1rem;
+            min-inline-size: 10rem;
+            border-block-end: 1px solid lightgray;
+        }
+
+        tfoot :is(th, td) {
+            border-block-end: unset;
+        }
+
+        tfoot tr {
+            background-color: whitesmoke;
+        }
+
+        :is(th, td):not(:first-child) {
+            border-inline-start: 1px solid lightgray;
+        }
+
+        .visually-hidden {
+            clip: rect(0 0 0 0);
+            clip-path: inset(50%);
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap;
+            width: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content responsive-wrapper">
+            <div class="header-logo">
+                <a href="/dashboard">
+                    <img src="https://airport-server.onrender.com/Topjet-logo.jpeg" width="110" height="32" />
+
+                </a>
+            </div>
+            <div class="header-navigation">
+                <nav class="header-navigation-links">
+                    <a href="/dashboard"> Dashboard </a>
+                </nav>
+
+            </div>
+
+        </div>
+    </header>
+    <main class="main">
+        <div class="responsive-wrapper">
+
+            <div class="content">
+                <div class="content-panel">
+                    <div class="vertical-tabs">
+
+                        <a href="/dashboard">Recent Quotes</a>
+                        <a href="/view-all-quotes">View All Quotes</a>
+                    </div>
+                </div>
+
+                <div class="content-main">
+                    <div class="card-grid">
+                        <main class="SecondMain"  id="DataSets">
+                            <figure class="wrapper">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Name</th>
+                                            <td>Full Name</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email</th>
+                                            <td>Full Name</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Phone</th>
+                                            <td>Full Name</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Preferred</th>
+                                            <td>Full Name</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Notes</th>
+                                            <td>Full Name</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Date</th>
+                                            <td>Full Name</td>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </figure>
+                        </main>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+
+        verify()
+        async function verify() {
+            let token = localStorage.getItem("token")
+            if (!token) {
+                window.location.href = "./login";
+                return
+            }
+
+            let VerifyToken = await fetch(`/verify`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "token": token
+
+                })
+            })
+
+            VerifyToken = await VerifyToken.text();
+
+            if (VerifyToken != "Verified") {
+                window.location.href = "/login";
+                return
+            } else {
+                await LoadCurrentQuoteData()
+            }
+
+        }
+
+        async function LoadCurrentQuoteData() {
+            let token = localStorage.getItem("token")
+            let container = document.getElementById("DataSets")
+            let id = sessionStorage.getItem("currentQuote")
+            if (!id) {
+                window.location.href = "/dashboard";
+                return
+            }
+            let FlightInfo = await fetch(`/getquote`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "token": token,
+                    "id": id
+                })
+            })
+
+            FlightInfo = await FlightInfo.json();
+            FlightInfo = FlightInfo.Flight
+            let flights = FlightInfo[0].flight
+            let contact = FlightInfo[0].contact
+            console.log(flights);
+            let tempelate = ` <figure class="wrapper"><table>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Name</th>
+                                            <td>${contact.Fname} ${contact.Lname}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email</th>
+                                            <td>${contact.Email}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Phone</th>
+                                            <td>${contact.Phone}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Preferred</th>
+                                            <td>${contact.Prefereed}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Notes</th>
+                                            <td>${contact.Note}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Date</th>
+                                            <td>${contact.date}</td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                    
+</table></figure>`
+
+
+            for (let i = 0; i < flights.length; i++) {
+                let data = flights[i]
+                let way = data[0]
+
+                if (way == "OneWay") {
+                    tempelate += ` <figure class="wrapper"><table>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Way</th>
+                                            <td>${way}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">From</th>
+                                            <td>${data[1]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">To</th>
+                                            <td>${data[2]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Date</th>
+                                            <td>${data[3]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Time</th>
+                                            <td>${data[4]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Passengers</th>
+                                            <td>${data[5]}</td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                    
+</table></figure>`
+
+                }else{
+                    tempelate += ` <figure class="wrapper"><table>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Way</th>
+                                            <td>${way}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">From</th>
+                                            <td>${data[1]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">To</th>
+                                            <td>${data[2]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Date</th>
+                                            <td>${data[3]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Time From</th>
+                                            <td>${data[4]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Time To</th>
+                                            <td>${data[5]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Passengers</th>
+                                            <td>${data[6]}</td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                    
+</table></figure>`
+
+                }
+            }
+
+            container.innerHTML = tempelate
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>

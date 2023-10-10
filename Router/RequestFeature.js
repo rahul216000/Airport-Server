@@ -11,10 +11,7 @@ mongoose.connect(DB).then(() => {
     console.log('Connected');
 }).catch((e) => { console.log('Not connected' + e); })
 
-const Flight = mongoose.model('Flights', {
-    contact: { type: Object },
-    flight: { type: Array }
-});
+const Flight = require('../Model/flight');
 
 router.post("/get-quote", async (req, res) => {
     let flightinfo = req.body.flight;
@@ -91,7 +88,7 @@ router.post("/get-quote", async (req, res) => {
                 <p>We look forward to serving you and ensuring your private charter experience is nothing short of extraordinary.</p>
                 <p>Safe travels and warm regards,</p>
                 <p>The TopJet Team</p>
-                <p> <img src="https://i.ibb.co/JrFdCYD/Whats-App-Image-2023-10-04-at-12-41-14.jpg" alt="Company Logo"></p>
+                <p> <img src="https://airport-server.onrender.com/Topjet-logo.jpeg" alt="Company Logo"></p>
                 <p>+1 (561) TOPJET-1</p>
                 <p>sales.us@topjet.aero</p>
                 <p>www.topjet.aero</p>
@@ -116,15 +113,15 @@ router.post("/get-quote", async (req, res) => {
 
 })
 
-// router.get("/dashboard", async (req, res)=>{
-//     let data = await GetData();
-//     res.send(data)
-// })
+router.get("/dashboard-data", async (req, res)=>{
+    let data = await GetData();
+    res.send(data)
+})
 
-// router.get("/dashboard/allquotes", async (req, res)=>{
-//     let FindDetails = await Flight.find()
-//     res.send(FindDetails)
-// })
+router.get("/dashboard/allquotes", async (req, res)=>{
+    let FindDetails = await Flight.find()
+    res.send(FindDetails)
+})
 
 async function GetData(){
 

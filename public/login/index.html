@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="./style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="main">
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+		<div class="signup">
+			<label for="chk" aria-hidden="true">Login</label>
+			<input type="email" name="email" placeholder="Email" id="email" required="">
+			<input type="password" name="pswd" placeholder="Password" id="Password" required="">
+			<button onclick="Login()">Login</button>
+		</div>
+	</div>
+
+	<script>
+		async function Login() {
+			let email = document.getElementById("email").value
+			let Password = document.getElementById("Password").value
+
+			if (!email || !Password) {
+				alert("Please Enter Login Credentials")
+				return
+			}
+
+			let Data = await fetch(`/login`, {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					"username": email,
+					"password": Password
+				})
+			})
+
+			Data = await Data.json();
+
+			if(Data.token){
+				localStorage.setItem("token", Data.token)
+				window.location.href = "./dashboard";
+
+			}
+
+		}
+	</script>
+</body>
+
+</html>
