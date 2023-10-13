@@ -1,0 +1,2422 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/three-dots/0.3.2/three-dots.min.css"
+        integrity="sha512-+eTSgc6ThafkxKlVr4a/XE1HdNz3zNWLdq5vP8H7ac9MuW/LMQBXI3O3ueyyf33yeCn+KhkVP1wBYYIb0OZh3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+    --white: #3030321f;
+    /* --white: #ffffff; */
+}
+
+body {
+    overflow-x: hidden !important;
+    font-family: Quicksand !important;
+    background: transparent;
+
+}
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+    width: 77%;
+
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+.CityInDropdown {
+    font-size: 19px;
+    font-weight: 700;
+    text-align: center;
+    border-top: 1px solid #d4d4d4;
+    cursor: auto !important;
+}
+
+.InputsClass {
+    border: 2px solid black;
+    width: 100%;
+    padding: 10px;
+    margin: 3px;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+    border-radius: 8px;
+    position: relative;
+    top: 25%;
+}
+
+.MainBox {
+    border: 10px solid #3030321f;
+    border-radius: 10px;
+    background: white
+    /* border: 10px solid rgba(255, 255, 255, .5); */
+
+}
+
+.FromPlace {
+    width: 100%;
+    /* padding: 10px; */
+    /* margin: 3px; */
+    text-align: center;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    color: black;
+
+}
+
+.FromDivBorder {
+    border-radius: 0;
+    border-right: 2px solid var(--white);
+    outline: none;
+    margin: auto;
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+
+}
+
+.DividerForRound {
+    border-radius: 0;
+    border-right: 2px solid var(--white);
+    outline: none;
+
+}
+
+.PassengerDivBorder {
+    border-radius: 0;
+    outline: none;
+    margin: auto;
+    cursor: pointer;
+}
+
+.ToPlace {
+    width: 100%;
+    /* padding: 10px; */
+    /* margin: 3px; */
+    text-align: center;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    color: black;
+}
+
+.DateSelector {
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid var(--white);
+    outline: none;
+
+    width: 100%;
+    /* padding: 10px; */
+    /* margin: 3px; */
+    text-align: center;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid var(--white);
+
+    color: black;
+}
+
+.DateSelectorRound {
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid var(--white);
+    outline: none;
+
+    width: 100%;
+    /* padding: 10px; */
+    /* margin: 3px; */
+    text-align: center;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid var(--white);
+
+    color: black;
+}
+
+
+
+.AutoShowTime {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    color: black;
+}
+
+
+.PassangerDiv {
+    width: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+    position: relative;
+    top: 27%;
+
+}
+
+.QuoteRoundBtnDiv {
+    position: relative;
+    left: 71%;
+    margin-top: 14px;
+}
+
+.PassengerSelect {
+    /* border: 0px;
+    outline: 0px;
+    text-align: center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    top: 28%;
+    font-size: 20px;
+    margin-left: 12px;
+    font-weight: 600; */
+    right: 0;
+    width: 100% !important;
+}
+
+.quote-btn {
+    position: relative;
+    top: 9%;
+    display: inline-block;
+    background: #0e2137;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    padding-top: 29px;
+    padding-bottom: 29px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    color: #fcfcfc;
+    margin: 0;
+    font-style: normal;
+    font-weight: 500;
+    font-family: "Calibri Regular", sans-serif;
+    font-size: calc(11px + 0.73vw);
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+.Add-flight-btn {
+    position: relative;
+    top: 25%;
+    display: inline-block;
+    background-color: #0e2137;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    padding: 7px calc(5px + 1.042vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    color: #fcfcfc;
+    margin: 0;
+    /* box-shadow: 0px 3px 57px var(--white); */
+    font-style: normal;
+    font-weight: 500;
+    font-family: "Calibri Regular", sans-serif;
+    font-size: calc(11px + 0.73vw);
+    text-transform: uppercase;
+    border: 5px solid var(--white);
+}
+
+.buttons-wrapper {
+    /* display: flex; */
+    gap: 6px;
+    width: fit-content;
+    /* justify-content: center; */
+    text-align: center;
+    /* align-items: center; */
+
+    border-radius: 6px;
+    /* padding: calc(3px + 0.26vw); */
+    padding: 10px;
+    /* background: var(--white) */
+}
+
+.SvgIcon {
+    display: inline-block;
+}
+
+.DeleteBtn {
+    width: 90%;
+    height: 90%;
+    padding: 10px;
+    margin: 5px;
+    color: white;
+    background-color: #0e2137;
+    border: 1px solid var(--white);
+    border-radius: 10px;
+}
+
+.svgDelete {
+    width: 34;
+    height: 40;
+}
+
+.contact-form {
+    border: 10px solid var(--white);
+    width: 56%;
+    padding: 1%;
+    border-radius: 11px;
+    background: white;
+}
+
+.contact-yes-btn {
+    border: 2px solid #0e2137;
+    display: inline-block;
+    color: white;
+    width: 47%;
+    padding: 8px;
+    margin: 6px;
+    font-size: 20px;
+    border-radius: 9px;
+    background-color: #0e2137;
+    font-weight: 600;
+}
+
+.form-inputs {
+    outline: none;
+    font-size: 20px;
+    padding: 9px;
+    border: none;
+    color: black;
+}
+.form-control:focus {
+    border: none !important;
+    border-color: none !important;
+    box-shadow: none !important;
+  }
+
+.SetABorderContact {
+    margin: 5px;
+    border-bottom: 2px solid var(--white);
+}
+
+.BoderAfterFName {
+    border: none;
+    border-radius: 0;
+    border-right: 2px solid var(--white);
+}
+
+.contact-form-text {
+    font-size: 20px;
+    padding: 9px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.contact-submit-btn {
+    text-align: center;
+}
+
+.contact-submit-btn button {
+    border: 2px solid #0e2137;
+    display: inline-block;
+    color: white;
+    width: 25%;
+    padding: 8px;
+    margin: 6px;
+    font-size: 20px;
+    border-radius: 9px;
+    background-color: #0e2137;
+    font-weight: 600;
+}
+
+/* Select */
+
+.select2-container--open .select2-dropdown--below {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.select2-container--open .select2-dropdown {
+    left: 0;
+}
+
+.select2-dropdown {
+    background-color: white;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    left: -100000px;
+    width: 100%;
+    z-index: 1051;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 0;
+    border-radius: 0;
+}
+
+.select2-container .select2-selection--single {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 28px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 26px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 20px;
+    display: none;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    border: 0px;
+    outline: 0px;
+    text-align: center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.select2-container--open .select2-dropdown {
+    width: 120px !important;
+    left: 0;
+}
+
+.GetQuoteRound {
+    width: 290px;
+    text-align: center;
+    padding: 13px;
+    font-size: 26px;
+}
+
+.RoundTripBtn {
+    display: inline-block;
+}
+
+.CloseContact {
+    float: right;
+    width: 40;
+    height: 40;
+}
+
+@media only screen and (max-width: 600px) {
+    .MainBox {
+        width: 97%;
+        padding: 0;
+        border: 5px solid var(--white);
+        margin: 0;
+        padding: 9px;
+        margin: 5px;
+    }
+
+    .FromDivBorder {
+        border-radius: 0;
+        border: 0;
+        border-bottom: 2px solid var(--white);
+        outline: none;
+        margin: auto;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        margin-top: 18px;
+    }
+
+    .DateDivBorder {
+        margin: 0;
+        width: 50%;
+        border: 0;
+        border-right: 2px solid var(--white);
+        margin-top: 18px;
+    }
+
+    .PassengerDivBorder {
+        /* margin: 0; */
+        width: 50%;
+    }
+
+    .PassengerDivBorderRound {
+        border-top: 2px solid var(--white);
+
+    }
+
+    .PassangerDiv {
+        /* display: none; */
+        padding-top: 0;
+    }
+
+    .quote-btn {
+        font-size: 18px;
+        padding: 11px;
+        margin-top: 5px;
+    }
+
+    .DeleteBtnDiv {
+        text-align: center;
+    }
+
+    .DeleteBtn {
+        width: 50%;
+        height: 100%;
+    }
+
+    .contact-form {
+        width: 97%;
+        padding: 0;
+        border: 5px solid var(--white);
+        margin: 0;
+        padding: 9px;
+        margin: 5px;
+    }
+
+    .form-inputs {
+        font-size: 18px;
+        padding: 7px;
+        font-weight: 500;
+        border: 3px solid var(--white);
+        border-radius: 8px;
+        color: black;
+        border: none;
+    }
+
+    .contact-form-text {
+        font-size: 18px;
+        padding: 7px;
+    }
+
+    .contact-yes-btn {
+        border: 2px solid #0e2137;
+        display: inline-block;
+        color: white;
+        width: 45%;
+        padding: 5px;
+        margin: 5px;
+    }
+
+    .contact-submit-btn button {
+        border: 2px solid #0e2137;
+        display: inline-block;
+        color: white;
+        width: 50%;
+    }
+
+    .DateDivBorderRound {
+        margin: auto;
+        width: 100%;
+        border: 0;
+        margin-top: 18px;
+    }
+
+    .RoundTripBtn {
+        border: 2px solid #0e2137;
+        display: inline-block;
+        color: white;
+        width: 45%;
+        padding: 9px;
+        margin: 5px;
+    }
+
+    .GetQuoteRound {
+        width: 277px;
+    }
+
+    .CloseContact {
+        position: absolute;
+        top: 5px;
+        right: 8px;
+        float: right;
+        width: 40;
+        height: 40;
+    }
+
+    .buttons-wrapper {
+        margin: auto;
+        position: relative;
+        bottom: 135px;
+    }
+
+    .StretchBottom {
+        margin-top: 75px !important;
+    }
+
+    .StretchBottomRound {
+        margin-top: 130px !important;
+    }
+
+    .Add-flight-btn {
+        width: 150px;
+    }
+
+    .QuoteRoundBtnDiv {
+        margin: auto;
+        left: 10%;
+        margin-top: -15px;
+    }
+
+    .btn-wrap-round {
+        display: inline-block;
+        position: relative;
+        bottom: 155px;
+    }
+
+    .OneWayBtnWrap {
+        padding: 3px;
+        display: flex;
+        gap: 6px;
+        border-radius: 6px;
+        margin-top: 10px;
+        border: none !important;
+    }
+
+    .TwoWayBtnWrap {
+        display: inline-block !important;
+        padding: 3px;
+        display: flex;
+        gap: 6px;
+        border-radius: 6px;
+        margin-left: 5% !important;
+        text-align: center;
+        border: none !important;
+
+    }
+
+    .QuoteRoundBtnDiv {
+        display: inline-block;
+        position: relative !important;
+        margin: auto;
+        text-align: center;
+        left: 2% !important;
+        padding: 0 !important;
+
+    }
+
+    .BoderAfterFName {
+        border: none;
+        border-radius: 0;
+        border-right: 2px solid var(--white);
+    }
+
+    .Add-flight-btn {
+        width: 135px;
+    }
+
+
+}
+
+.OneWayBtnWrap {
+    padding: 3px;
+    display: flex;
+    gap: 6px;
+    border-radius: 6px;
+    margin-top: 10px;
+    border: 6px solid var(--white);
+}
+
+.TwoWayBtnWrap {
+    display: inline-block !important;
+    padding: 3px;
+    display: flex;
+    gap: 6px;
+    border-radius: 6px;
+    margin-top: 10px;
+    border: 6px solid var(--white);
+}
+
+.QuoteRoundBtnDiv {
+    display: inline-block;
+    position: relative;
+    left: 66%;
+    margin-top: 0
+}
+
+.wrapper-1 {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper-2 {
+    padding: 30px;
+    text-align: center;
+}
+
+h1 {
+    font-family: Quicksand !important;
+    font-size: 4em;
+    letter-spacing: 3px;
+    color: #0e2137;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.wrapper-2 p {
+    margin: 0;
+    font-size: 1.3em;
+    color: #0e2137;
+    letter-spacing: 1px;
+}
+
+.go-home {
+    color: #fff;
+    background: #0e2137;
+    border: none;
+    padding: 10px 50px;
+    margin: 30px 0;
+    border-radius: 30px;
+    text-transform: capitalize;
+    box-shadow: 0 10px 16px 1px rgba(174, 199, 251, 1);
+}
+
+.footer-like {
+    /* margin-top: auto; */
+    background: #D7E6FE;
+    padding: 6px;
+    text-align: center;
+}
+
+.footer-like p {
+    margin: 0;
+    padding: 4px;
+    color: #5892FF;
+    font-family: 'Source Sans Pro', sans-serif;
+    letter-spacing: 1px;
+}
+
+.footer-like p a {
+    text-decoration: none;
+    color: #5892FF;
+    font-weight: 600;
+}
+
+@media (min-width:360px) {
+    h1 {
+        font-size: 4.5em;
+    }
+
+    .go-home {
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width:600px) {
+    .content {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .wrapper-1 {
+        height: initial;
+        max-width: 620px;
+        margin: 0 auto;
+        margin-top: 50px;
+        box-shadow: 4px 8px 40px 8px rgba(88, 146, 255, 0.2);
+    }
+
+}
+
+#loading {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0.8;
+    background-color: #fff;
+    z-index: 1;
+}
+
+#loading-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    position: relative;
+    z-index: 100;
+}
+    </style>
+    <title>Airport Forms</title>
+</head>
+
+<body>
+
+    <div id="loading" style="display: none;">
+
+        <div class="dot-windmill" id="loading-image"></div>
+    </div>
+
+    <div id="FlightsBlock" class="container mt-5 ">
+
+
+    </div>
+
+    <div class="container mt-5 " id="OneWay">
+        <div class="row MainBox">
+
+            <div class="col-sm col-sm-2.5 FromDivBorder">
+
+                <span class="SvgIcon">
+                    <svg width="calc(20px + 0.9vw)" height="calc(20px + 0.9vw)" viewBox="0 0 36 36" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M3.78004 28.0725H32.28V31.0725H3.78004V28.0725ZM33.135 14.0325C32.82 12.8325 31.575 12.1125 30.375 12.4425L22.41 14.5725L12.06 4.9275L9.16504 5.6925L15.375 16.4475L7.92004 18.4425L4.96504 16.1325L2.79004 16.7175L6.67504 23.4525L31.53 16.8075C32.745 16.4625 33.45 15.2325 33.135 14.0325Z"
+                            fill="#878787"></path>
+                    </svg>
+                </span>
+
+                <span class="autocomplete">
+
+                    <input type="text" placeholder="From" class="FromPlace" id="FromOneWay"
+                        oninput="SearchAirports(this)">
+
+                    <div class="autocomplete-items" id="FromOneWaySearchData">
+                    </div>
+                </span>
+
+            </div>
+
+            <div class="col-sm col-sm-2.5 FromDivBorder">
+                <span class="SvgIcon">
+                    <svg width="calc(17px + 0.9vw)" height="calc(17px + 0.9vw)" viewBox="0 0 30 30" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0.75 26.25H29.25V29.25H0.75V26.25ZM26.01 21.525C27.21 21.84 28.44 21.135 28.77 19.935C29.085 18.735 28.38 17.505 27.18 17.175L19.215 15.045L15.075 1.515L12.18 0.75V13.17L4.725 11.175L3.33 7.695L1.155 7.11V14.865L26.01 21.525Z"
+                            fill="#878787"></path>
+                    </svg>
+                </span>
+
+                <span class="autocomplete">
+                    <input type="text" placeholder="To" id="ToOneWay" class="ToPlace" oninput="SearchAirports(this)">
+                </span>
+            </div>
+
+            <div class="col-sm col-sm-2 FromDivBorder DateDivBorder">
+                <div>
+                    <input name="datetimes" id="DateOneWay" class="DateSelector" placeholder="Date">
+                </div>
+
+                <div>
+                    <select name="" id="TimeOneWay" class="AutoShowTime">
+                        <option value="00:00">00:00</option>
+                        <option value="00:30">00:30</option>
+                        <option value="01:00">01:00</option>
+                        <option value="01:30">01:30</option>
+
+                        <option value="02:00">02:00</option>
+                        <option value="02:30">02:30</option>
+                        <option value="03:00">03:00</option>
+                        <option value="03:30">03:30</option>
+
+                        <option value="04:00">04:00</option>
+                        <option value="04:30">04:30</option>
+                        <option value="05:00">05:00</option>
+                        <option value="05:30">05:30</option>
+
+                        <option value="06:00">06:00</option>
+                        <option value="06:30">06:30</option>
+                        <option value="07:00">07:00</option>
+                        <option value="07:30">07:30</option>
+
+                        <option value="08:00">08:00</option>
+                        <option value="08:30">08:30</option>
+                        <option value="09:00" selected>09:00</option>
+                        <option value="09:30">09:30</option>
+
+
+                        <option value="10:00">10:00</option>
+                        <option value="10:30">10:30</option>
+                        <option value="11:00">11:00</option>
+                        <option value="11:30">11:30</option>
+
+                        <option value="12:00">12:00</option>
+                        <option value="12:30">12:30</option>
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option>
+
+
+                        <option value="14:00">14:00</option>
+                        <option value="14:30">14:30</option>
+                        <option value="15:00">15:00</option>
+                        <option value="15:30">15:30</option>
+
+                        <option value="16:00">16:00</option>
+                        <option value="16:30">16:30</option>
+                        <option value="17:00">17:00</option>
+                        <option value="17:30">17:30</option>
+
+
+                        <option value="18:00">18:00</option>
+                        <option value="18:30">18:30</option>
+                        <option value="19:00">19:00</option>
+                        <option value="19:30">19:30</option>
+
+                        <option value="20:00">20:00</option>
+                        <option value="20:30">20:30</option>
+                        <option value="21:00">21:00</option>
+                        <option value="21:30">21:30</option>
+
+
+                        <option value="22:00">22:00</option>
+                        <option value="22:30">22:30</option>
+                        <option value="23:00">23:00</option>
+                        <option value="23:30">23:30</option>
+
+                    </select>
+                </div>
+
+
+            </div>
+
+            <div class="col-sm col-sm-2 PassengerDivBorder" onclick="OpenSelect('PassengerOneWay')">
+
+                <div style="display: inline-block;
+                    margin-left: 36%;">
+
+                    <span class="SvgIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="calc(13px + 0.729vw)"
+                            height="calc(13px + 0.729vw)" fill="currentColor" class="bi bi-people-fill"
+                            viewBox="0 0 16 16">
+                            <path fill="#878787"
+                                d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                        </svg>
+                    </span>
+                    <select name="" id="PassengerOneWay" class="PassengerSelect">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                    </select>
+                </div>
+                <div class="PassangerDiv">Passenger</div>
+
+
+            </div>
+
+            <div class="col-sm col-sm-3 StretchBottom" style="margin: auto;">
+                <button class="quote-btn" style="width: 100%;" onclick="GetAQuoteForOne()">Request A QUOTE</button>
+            </div>
+
+
+        </div>
+
+        <div class="buttons-wrapper OneWayBtnWrap">
+
+
+            <button class="Add-flight-btn" onclick="AddFlightForHomepageOne()">
+                <svg width="calc(18px + 0.625vw)" height="calc(18px + 0.625vw)" viewBox="0 0 33 32" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M18.0833 9.33342H15.4167V14.6667H10.0833V17.3334H15.4167V22.6667H18.0833V17.3334H23.4167V14.6667H18.0833V9.33342ZM16.75 2.66675C9.39001 2.66675 3.41667 8.64008 3.41667 16.0001C3.41667 23.3601 9.39001 29.3334 16.75 29.3334C24.11 29.3334 30.0833 23.3601 30.0833 16.0001C30.0833 8.64008 24.11 2.66675 16.75 2.66675ZM16.75 26.6667C10.87 26.6667 6.08334 21.8801 6.08334 16.0001C6.08334 10.1201 10.87 5.33341 16.75 5.33341C22.63 5.33341 27.4167 10.1201 27.4167 16.0001C27.4167 21.8801 22.63 26.6667 16.75 26.6667Z"
+                        fill="#FCFCFC"></path>
+                </svg>
+                ADD FLIGHT</button>
+
+            <button class="Add-flight-btn" onclick="RoundTrip()">
+                <svg width="calc(18px + 0.625vw)" height="calc(18px + 0.625vw)" viewBox="0 0 33 32" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20.7833 22.6666L22.5167 28.5332H21.05L17.5833 22.6666H13.5833C12.85 22.6666 12.25 22.0666 12.25 21.3332C12.25 20.5999 12.85 19.9999 13.5833 19.9999H17.5833L21.05 14.1332H22.5167L20.7833 19.9999H24.5833L25.5833 18.6666H26.9167L26.1167 21.3332L26.9167 23.9999H25.5833L24.5833 22.6666H20.7833ZM7.91667 9.33322L6.91667 7.99989H5.58333L6.38333 10.6666L5.58333 13.3332H6.91667L7.91667 11.9999H11.7167L9.98333 17.8666H11.45L14.9167 11.9999H18.9167C19.65 11.9999 20.25 11.3999 20.25 10.6666C20.25 9.93322 19.65 9.33322 18.9167 9.33322H14.9167L11.45 3.46655H9.98333L11.7167 9.33322H7.91667Z"
+                        fill="#FCFCFC"></path>
+                </svg>
+                ROUND TRIP</button>
+
+
+        </div>
+
+    </div>
+
+    <div class="container mt-5 " id="RoundTrip" style="display: none;">
+        <div class="row MainBox">
+
+            <div class="col-sm col-sm-3 FromDivBorder">
+
+                <span class="SvgIcon">
+                    <svg width="calc(20px + 0.9vw)" height="calc(20px + 0.9vw)" viewBox="0 0 36 36" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M3.78004 28.0725H32.28V31.0725H3.78004V28.0725ZM33.135 14.0325C32.82 12.8325 31.575 12.1125 30.375 12.4425L22.41 14.5725L12.06 4.9275L9.16504 5.6925L15.375 16.4475L7.92004 18.4425L4.96504 16.1325L2.79004 16.7175L6.67504 23.4525L31.53 16.8075C32.745 16.4625 33.45 15.2325 33.135 14.0325Z"
+                            fill="#878787"></path>
+                    </svg>
+                </span>
+
+                <span class="autocomplete">
+
+                    <input type="text" placeholder="From" id="FromTwoWay" class="FromPlace "
+                        oninput="SearchAirports(this)">
+                </span>
+
+            </div>
+
+            <div class="col-sm col-sm-3 FromDivBorder">
+                <span class="SvgIcon">
+                    <svg width="calc(17px + 0.9vw)" height="calc(17px + 0.9vw)" viewBox="0 0 30 30" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0.75 26.25H29.25V29.25H0.75V26.25ZM26.01 21.525C27.21 21.84 28.44 21.135 28.77 19.935C29.085 18.735 28.38 17.505 27.18 17.175L19.215 15.045L15.075 1.515L12.18 0.75V13.17L4.725 11.175L3.33 7.695L1.155 7.11V14.865L26.01 21.525Z"
+                            fill="#878787"></path>
+                    </svg>
+                </span>
+
+                <span class="autocomplete">
+                    <input type="text" placeholder="To" id="ToTwoWay" class="ToPlace" oninput="SearchAirports(this)">
+                </span>
+            </div>
+
+            <div class="col-sm col-sm-4 FromDivBorder DateDivBorder DateDivBorderRound mb-2">
+                <div>
+                    <input name="datetimes" class="DateSelectorRound" id="DateTwoWay" placeholder="Date">
+                </div>
+
+                <div class="row">
+                    <div class=" col-6 DividerForRound">
+                        <select name="" id="Time1stTwoWay" class="AutoShowTime">
+                            <option value="00:00">00:00</option>
+                            <option value="00:30">00:30</option>
+                            <option value="01:00">01:00</option>
+                            <option value="01:30">01:30</option>
+
+                            <option value="02:00">02:00</option>
+                            <option value="02:30">02:30</option>
+                            <option value="03:00">03:00</option>
+                            <option value="03:30">03:30</option>
+
+                            <option value="04:00">04:00</option>
+                            <option value="04:30">04:30</option>
+                            <option value="05:00">05:00</option>
+                            <option value="05:30">05:30</option>
+
+                            <option value="06:00">06:00</option>
+                            <option value="06:30">06:30</option>
+                            <option value="07:00">07:00</option>
+                            <option value="07:30">07:30</option>
+
+                            <option value="08:00">08:00</option>
+                            <option value="08:30">08:30</option>
+                            <option value="09:00" selected>09:00</option>
+                            <option value="09:30">09:30</option>
+
+
+                            <option value="10:00">10:00</option>
+                            <option value="10:30">10:30</option>
+                            <option value="11:00">11:00</option>
+                            <option value="11:30">11:30</option>
+
+                            <option value="12:00">12:00</option>
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+
+
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="15:00">15:00</option>
+                            <option value="15:30">15:30</option>
+
+                            <option value="16:00">16:00</option>
+                            <option value="16:30">16:30</option>
+                            <option value="17:00">17:00</option>
+                            <option value="17:30">17:30</option>
+
+
+                            <option value="18:00">18:00</option>
+                            <option value="18:30">18:30</option>
+                            <option value="19:00">19:00</option>
+                            <option value="19:30">19:30</option>
+
+                            <option value="20:00">20:00</option>
+                            <option value="20:30">20:30</option>
+                            <option value="21:00">21:00</option>
+                            <option value="21:30">21:30</option>
+
+
+                            <option value="22:00">22:00</option>
+                            <option value="22:30">22:30</option>
+                            <option value="23:00">23:00</option>
+                            <option value="23:30">23:30</option>
+
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <select name="" id="Time2ndTwoWay" class="AutoShowTime">
+                            <option value="00:00">00:00</option>
+                            <option value="00:30">00:30</option>
+                            <option value="01:00">01:00</option>
+                            <option value="01:30">01:30</option>
+
+                            <option value="02:00">02:00</option>
+                            <option value="02:30">02:30</option>
+                            <option value="03:00">03:00</option>
+                            <option value="03:30">03:30</option>
+
+                            <option value="04:00">04:00</option>
+                            <option value="04:30">04:30</option>
+                            <option value="05:00">05:00</option>
+                            <option value="05:30">05:30</option>
+
+                            <option value="06:00">06:00</option>
+                            <option value="06:30">06:30</option>
+                            <option value="07:00">07:00</option>
+                            <option value="07:30">07:30</option>
+
+                            <option value="08:00">08:00</option>
+                            <option value="08:30">08:30</option>
+                            <option value="09:00" selected>09:00</option>
+                            <option value="09:30">09:30</option>
+
+
+                            <option value="10:00">10:00</option>
+                            <option value="10:30">10:30</option>
+                            <option value="11:00">11:00</option>
+                            <option value="11:30">11:30</option>
+
+                            <option value="12:00">12:00</option>
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+
+
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="15:00">15:00</option>
+                            <option value="15:30">15:30</option>
+
+                            <option value="16:00">16:00</option>
+                            <option value="16:30">16:30</option>
+                            <option value="17:00">17:00</option>
+                            <option value="17:30">17:30</option>
+
+
+                            <option value="18:00">18:00</option>
+                            <option value="18:30">18:30</option>
+                            <option value="19:00">19:00</option>
+                            <option value="19:30">19:30</option>
+
+                            <option value="20:00">20:00</option>
+                            <option value="20:30">20:30</option>
+                            <option value="21:00">21:00</option>
+                            <option value="21:30">21:30</option>
+
+
+                            <option value="22:00">22:00</option>
+                            <option value="22:30">22:30</option>
+                            <option value="23:00">23:00</option>
+                            <option value="23:30">23:30</option>
+
+                        </select>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="col-sm col-sm-2 PassengerDivBorder PassengerDivBorderRound"
+                onclick="OpenSelect('PassengerTwoWay')">
+
+                <div class="mt-3" style="display: inline-block;
+                margin-left: 36%;">
+
+                    <span class="SvgIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="calc(13px + 0.729vw)"
+                            height="calc(13px + 0.729vw)" fill="currentColor" class="bi bi-people-fill"
+                            viewBox="0 0 16 16">
+                            <path fill="#878787"
+                                d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                        </svg>
+                    </span>
+                    <select name="" id="PassengerTwoWay" class="PassengerSelect">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                    </select>
+                </div>
+                <div class="PassangerDiv ">Passenger</div>
+
+            </div>
+            <div class="StretchBottomRound"></div>
+
+        </div>
+
+        <div class="buttons-wrapper btn-wrap-round">
+            <div class="TwoWayBtnWrap">
+                <button class="Add-flight-btn RoundTripBtn" onclick="AddFlightForHomepageTwo()">
+                    <svg width="calc(18px + 0.625vw)" height="calc(18px + 0.625vw)" viewBox="0 0 33 32" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M18.0833 9.33342H15.4167V14.6667H10.0833V17.3334H15.4167V22.6667H18.0833V17.3334H23.4167V14.6667H18.0833V9.33342ZM16.75 2.66675C9.39001 2.66675 3.41667 8.64008 3.41667 16.0001C3.41667 23.3601 9.39001 29.3334 16.75 29.3334C24.11 29.3334 30.0833 23.3601 30.0833 16.0001C30.0833 8.64008 24.11 2.66675 16.75 2.66675ZM16.75 26.6667C10.87 26.6667 6.08334 21.8801 6.08334 16.0001C6.08334 10.1201 10.87 5.33341 16.75 5.33341C22.63 5.33341 27.4167 10.1201 27.4167 16.0001C27.4167 21.8801 22.63 26.6667 16.75 26.6667Z"
+                            fill="#FCFCFC"></path>
+                    </svg>
+                    ADD FLIGHT</button>
+
+                <button class="Add-flight-btn RoundTripBtn" onclick="OneWay()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="calc(18px + 0.625vw)" height="calc(18px + 0.625vw)"
+                        fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
+                        <path
+                            d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z" />
+                    </svg>
+                    ONE-WAY</button>
+            </div>
+            <div class="QuoteRoundBtnDiv">
+                <button class="quote-btn GetQuoteRound" onclick="GetAQuoteForTwo()">
+                    Request A QUOTE</button>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <!-- Contact -->
+    <div id="ContactForm" style="display: none;">
+        <div class="container" onclick="CloseContactForm()">
+            <svg class="CloseContact" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-x-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path
+                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+        </div>
+        <div class="container contact-form mt-5">
+            <div class="row SetABorderContact">
+                <div class="col">
+                    <input type="text" class="form-control form-inputs BoderAfterFName" placeholder="First name">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control form-inputs" placeholder="Last name">
+                </div>
+            </div>
+
+            <div class="row  mt-3 SetABorderContact">
+                <div class="col" style="display: inline-block;">
+
+                    <div class="input-group">
+                        <input type="email" class="form-control form-inputs" style="width: 90%;" placeholder="Email">
+
+                        <div class="input-group-addon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="calc(20px + 0.9vw)"
+                                height="calc(20px + 0.9vw)" fill="currentColor" class="bi bi-envelope-at-fill"
+                                viewBox="0 0 16 16">
+                                <path fill="#878787"
+                                    d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2H2Zm-2 9.8V4.698l5.803 3.546L0 11.801Zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586l-1.239-.757ZM16 9.671V4.697l-5.803 3.546.338.208A4.482 4.482 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671Z" />
+                                <path fill="#878787"
+                                    d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034v.21Zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791Z" />
+                            </svg>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row  mt-3 SetABorderContact">
+                <div class="col">
+
+                    <div class="col">
+
+                        <div class="input-group">
+                            <input type="tel" class="form-control form-inputs" style="width: 90%;" placeholder="Phone">
+
+                            <div class="input-group-addon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="calc(20px + 0.9vw)"
+                                    height="calc(20px + 0.9vw)" fill="currentColor" class="bi bi-telephone-fill"
+                                    viewBox="0 0 16 16">
+                                    <path fill="#878787" fill-rule="evenodd"
+                                        d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                                </svg>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row  mt-3" id="QuestionInContact">
+                <div class="col">
+                    <div class="contact-form-text">
+
+                        HAVE YOU FLOWN PRIVATELY BEFORE?
+                    </div>
+                    <div>
+
+                        <button class="contact-yes-btn" onclick="Yes()">Yes</button>
+                        <button class="contact-yes-btn" onclick="No()">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row  mt-3 SetABorderContact" style="display: none;" id="AnswerInContact">
+                <div class="col">
+                    <div class="contact-form-text">
+
+                        PREFERRED AIRCRAFT/CATEGORY?
+                    </div>
+                    <input type="text" class="form-control form-inputs">
+                </div>
+            </div>
+
+            <div class="row mt-3 SetABorderContact">
+                <div class="col">
+                    <input type="text" class="form-control form-inputs" placeholder="Notes">
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="contact-submit-btn ">
+            <button onclick="SubmitQuote()">SUBMIT</button>
+        </div>
+    </div>
+
+    <!-- ThankYou Page -->
+
+    <div class="content container mt-5" id="ThankYouPage" style="display: none;">
+        <div class="wrapper-1" style="height: fit-content;">
+            <div class="wrapper-2">
+                <h1>Thank you</h1>
+                <p>We will be in touch shortly. </p>
+                <!-- <p>you should receive a confirmation email soon  </p> -->
+                <button class="go-home" onclick="GoToHome()">
+                    Back To Home
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!-- <iframe src="https://www.snowboardingdays.com/snowboard-finder-tool/" frameborder="0" width="100%" scrolling="no" id="frame" style="display: flex;
+    align-items: center;
+    justify-content: center; padding: 0px;
+    margin: 0px;">
+    </iframe>
+    <script>
+        var frame = document.getElementById("frame");
+        setInterval(resizeIframe, 500);
+        function resizeIframe() {
+            let height = parseInt(sessionStorage.getItem("FinderbodyHeight"));
+            frame.style.height = height + "px";
+        }
+    </script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script>
+        // var API = "http://127.0.0.1:3000"
+var API = "https://airport-server.onrender.com"
+
+function autocomplete(inp, arr, CityArr, NumberOnCity) {
+
+    var currentFocus;
+    var a, b, i, val = inp.value;
+    closeAllLists();
+    if (!val) { return closeAllLists(); }
+    currentFocus = -1;
+    a = document.createElement("DIV");
+    a.setAttribute("id", inp.id + "autocomplete-list");
+    a.setAttribute("class", "autocomplete-items");
+    let count = 0
+    inp.parentNode.appendChild(a);
+    let CityName = ""
+    for (i = 0; i < arr.length; i++) {
+
+        if (i == NumberOnCity[count]) {
+
+            let City = document.createElement("DIV");
+            City.innerHTML += CityArr[count]
+            CityName = CityArr[count]
+            City.setAttribute("class", "CityInDropdown");
+            a.appendChild(City);
+            count++
+        }
+
+
+        b = document.createElement("DIV");
+        b.innerHTML += arr[i] + ", " + CityName
+        b.innerHTML += "<input type='hidden' value='" + arr[i] + ", " + CityName + "'>";
+        b.addEventListener("click", function (e) {
+            inp.value = this.getElementsByTagName("input")[0].value;
+            closeAllLists();
+        });
+        a.appendChild(b);
+
+    }
+    // inp.addEventListener("input", function (e) {
+    //     var a, b, i, val = this.value;
+    //     closeAllLists();
+    //     if (!val) { return false; }
+    //     currentFocus = -1;
+    //     a = document.createElement("DIV");
+    //     a.setAttribute("id", this.id + "autocomplete-list");
+    //     a.setAttribute("class", "autocomplete-items");
+    //     let count = 0
+    //     this.parentNode.appendChild(a);
+
+    //     for (i = 0; i < arr.length; i++) {
+
+    //         if (i == NumberOnCity[count]) {
+
+    //             let City = document.createElement("DIV");
+    //             City.innerHTML += CityArr[count]
+    //             City.setAttribute("class", "CityInDropdown");
+    //             a.appendChild(City);
+    //             count++
+    //         }
+
+
+    //         b = document.createElement("DIV");
+    //         b.innerHTML += arr[i]
+    //         b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+    //         b.addEventListener("click", function (e) {
+    //             inp.value = this.getElementsByTagName("input")[0].value;
+    //             closeAllLists();
+    //         });
+    //         a.appendChild(b);
+
+    //     }
+    // });
+    /*execute a function presses a key on the keyboard:*/
+    inp.addEventListener("keydown", function (e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+            /*If the arrow DOWN key is pressed,
+            increase the currentFocus variable:*/
+            currentFocus++;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 38) { //up
+            /*If the arrow UP key is pressed,
+            decrease the currentFocus variable:*/
+            currentFocus--;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 13) {
+            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            e.preventDefault();
+            if (currentFocus > -1) {
+                /*and simulate a click on the "active" item:*/
+                if (x) x[currentFocus].click();
+            }
+        }
+    });
+    function addActive(x) {
+        /*a function to classify an item as "active":*/
+        if (!x) return false;
+        /*start by removing the "active" class on all items:*/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        /*add class "autocomplete-active":*/
+        x[currentFocus].classList.add("autocomplete-active");
+    }
+    function removeActive(x) {
+        /*a function to remove the "active" class from all autocomplete items:*/
+        for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+        }
+    }
+    function closeAllLists(elmnt) {
+        /*close all autocomplete lists in the document,
+        except the one passed as an argument:*/
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+            }
+        }
+    }
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
+}
+let count = 0
+async function AutoComplete(ele) {
+    if (!ele.value || ele.value.trim().length === 0) {
+        return
+    }
+    count++
+    let value = ele.value
+    if (ele.value.endsWith(" ")) {
+        value = ele.value.slice(0, -1)
+    }
+
+    let Data = await fetch(`/`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "query": value,
+            "count": count
+        })
+    })
+
+    Data = await Data.json();
+    let countNo = await Data.countNo;
+    let FilterAirports = await Data.AirportsArr;
+    let CityArr = await Data.CityArray;
+    let NumberOnCity = Data.NumberOnCitiesArr;
+    let NumberOnCitiesArr = []
+
+    if (countNo != count) {
+        return
+    }
+
+    for (let i = 0; i < NumberOnCity.length; i++) {
+        NumberOnCitiesArr.push(Sum(NumberOnCity, i));
+    }
+
+    if (FilterAirports.length == 0) {
+        return
+    }
+    let id = ele.id + "SearchData";
+    autocomplete(ele, FilterAirports, CityArr, NumberOnCitiesArr);
+
+}
+
+function debounce(func, timeout = 300) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+}
+
+const SearchAirports = debounce((ele) => AutoComplete(ele));
+
+function Sum(arr, length) {
+    let sum = 0;
+
+    // Running the for loop
+    for (let i = 0; i < length; i++) {
+        sum += arr[i];
+    }
+    return sum
+}
+
+function RoundTrip() {
+    document.getElementById("OneWay").style.display = "none"
+    document.getElementById("RoundTrip").style.display = "block"
+    $('.PassengerSelect').select2();
+    $('.AutoShowTime').select2();
+}
+
+function OneWay() {
+    document.getElementById("OneWay").style.display = "block"
+    document.getElementById("RoundTrip").style.display = "none"
+    $('.PassengerSelect').select2();
+    $('.AutoShowTime').select2();
+}
+
+
+function AddFlight() {
+    WhichAddFlightInOneorTwo = "one"
+    document.getElementById("FlightsBlock").innerHTML = ""
+    let From = document.getElementById("FromOneWay").value;
+    let To = document.getElementById("ToOneWay").value;
+    let DateOneWay = document.getElementById("DateOneWay").value;
+    let Time = document.getElementById("TimeOneWay").value;
+    let Passenger = document.getElementById("PassengerOneWay").value;
+
+    if (!From || !To || !DateOneWay || !Time || !Passenger) {
+        return alert("Please Fill all fields")
+
+    }
+
+    let DataArr = sessionStorage.getItem("DataArr");
+
+    if (DataArr) {
+        DataArr = JSON.parse(DataArr);
+        DataArr = Object.values(DataArr);
+        DataArr = [...DataArr, ["OneWay", From, To, DateOneWay, Time, Passenger]]
+    } else {
+        DataArr = [["OneWay", From, To, DateOneWay, Time, Passenger]]
+
+    }
+
+    DataArr = JSON.stringify(DataArr);
+    sessionStorage.setItem("DataArr", DataArr);
+
+    ShowRecentlyAddedFlights()
+
+
+
+}
+
+function ShowRecentlyAddedFlights() {
+    let DataArr = sessionStorage.getItem("DataArr");
+
+    if (!DataArr) {
+        return
+    }
+
+    DataArr = JSON.parse(DataArr);
+    DataArr = Object.values(DataArr);
+
+    for (let i = 0; i < DataArr.length; i++) {
+        let data = DataArr[i]
+        if (data[0] == "OneWay") {
+
+            ShowOnScreenFlightsForOne(data[0], data[1], data[2], data[3], data[4], data[5], i)
+        } else {
+            ShowOnScreenFlightsForTwo(data[0], data[1], data[2], data[3], data[4], data[5], data[6], i)
+
+        }
+    }
+}
+
+function ShowOnScreenFlightsForOne(way, From, To, DateOneWay, Time, Passenger, index) {
+
+    let date = new Date();
+    date = date.getMilliseconds()
+
+    let data = `<div class="row MainBox mt-3">
+
+    <div class="col-sm col-sm-3 FromDivBorder">
+
+        <span class="SvgIcon">
+            <svg width="calc(20px + 0.9vw)" height="calc(20px + 0.9vw)" viewBox="0 0 36 36" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M3.78004 28.0725H32.28V31.0725H3.78004V28.0725ZM33.135 14.0325C32.82 12.8325 31.575 12.1125 30.375 12.4425L22.41 14.5725L12.06 4.9275L9.16504 5.6925L15.375 16.4475L7.92004 18.4425L4.96504 16.1325L2.79004 16.7175L6.67504 23.4525L31.53 16.8075C32.745 16.4625 33.45 15.2325 33.135 14.0325Z"
+                    fill="#878787"></path>
+            </svg>
+        </span>
+
+        <span class="autocomplete">
+
+            <input type="text" placeholder="From" class="FromPlace" value="${From}" oninput="SearchAirports(this)"
+                >
+        </span>
+
+    </div>
+
+    <div class="col-sm col-sm-3 FromDivBorder">
+        <span class="SvgIcon">
+            <svg width="calc(17px + 0.9vw)" height="calc(17px + 0.9vw)" viewBox="0 0 30 30" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M0.75 26.25H29.25V29.25H0.75V26.25ZM26.01 21.525C27.21 21.84 28.44 21.135 28.77 19.935C29.085 18.735 28.38 17.505 27.18 17.175L19.215 15.045L15.075 1.515L12.18 0.75V13.17L4.725 11.175L3.33 7.695L1.155 7.11V14.865L26.01 21.525Z"
+                    fill="#878787"></path>
+            </svg>
+        </span>
+
+        <span class="autocomplete">
+            <input type="text" placeholder="To" value="${To}" class="ToPlace" oninput="SearchAirports(this)"
+             >
+        </span>
+    </div>
+
+    <div class="col-sm col-sm-3 FromDivBorder DateDivBorder">
+        <div>
+            <input name="datetimes" value="${DateOneWay}" class="DateSelector" placeholder="Date">
+        </div>
+
+        <div>
+            <select name="" id="${date}Time" class="AutoShowTime">
+                <option value="00:00">00:00</option>
+                <option value="00:30">00:30</option>
+                <option value="01:00">01:00</option>
+                <option value="01:30">01:30</option>
+
+                <option value="02:00">02:00</option>
+                <option value="02:30">02:30</option>
+                <option value="03:00">03:00</option>
+                <option value="03:30">03:30</option>
+
+                <option value="04:00">04:00</option>
+                <option value="04:30">04:30</option>
+                <option value="05:00">05:00</option>
+                <option value="05:30">05:30</option>
+
+                <option value="06:00">06:00</option>
+                <option value="06:30">06:30</option>
+                <option value="07:00">07:00</option>
+                <option value="07:30">07:30</option>
+
+                <option value="08:00">08:00</option>
+                <option value="08:30">08:30</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+
+
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+
+
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+
+
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+                <option value="21:30">21:30</option>
+
+
+                <option value="22:00">22:00</option>
+                <option value="22:30">22:30</option>
+                <option value="23:00">23:00</option>
+                <option value="23:30">23:30</option>
+
+            </select>
+        </div>
+
+
+    </div>
+
+    <div class="col-sm col-sm-2 PassengerDivBorder" onclick="OpenSelect('${date}Passenger')">
+
+        <div style="display: inline-block;
+            margin-left: 36%;">
+
+            <span class="SvgIcon">
+                <svg width="calc(13px + 0.729vw)" height="calc(13px + 0.729vw)" viewBox="0 0 28 28" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M14 3.5C15.925 3.5 17.5 5.075 17.5 7C17.5 8.925 15.925 10.5 14 10.5C12.075 10.5 10.5 8.925 10.5 7C10.5 5.075 12.075 3.5 14 3.5ZM14 21C18.725 21 24.15 23.2575 24.5 24.5H3.5C3.9025 23.24 9.2925 21 14 21ZM14 0C10.1325 0 7 3.1325 7 7C7 10.8675 10.1325 14 14 14C17.8675 14 21 10.8675 21 7C21 3.1325 17.8675 0 14 0ZM14 17.5C9.3275 17.5 0 19.845 0 24.5V28H28V24.5C28 19.845 18.6725 17.5 14 17.5Z"
+                        fill="#0E2137"></path>
+                </svg>
+            </span>
+            <select name="" id="${date}Passenger" class="PassengerSelect">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+            </select>
+        </div>
+        <div class="PassangerDiv">Passenger</div>
+
+
+    </div>
+
+    <div class="col-sm col-sm-1 DeleteBtnDiv">
+             <button class="DeleteBtn" onclick="DeleteFlightBlock(${index})"><svg class="svgDelete" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+          </svg></button>
+    </div>
+
+
+</div>`
+
+    $('#FlightsBlock').append(data);
+    document.getElementById(`${date}Passenger`).value = Passenger
+    document.getElementById(`${date}Time`).value = Time
+
+    $('.PassengerSelect').select2();
+    $('.AutoShowTime').select2();
+    $('.DateSelector').daterangepicker({
+        "singleDatePicker": true,
+        "showDropdowns": true,
+    }, function (start, end, label) {
+    });
+
+    $('.DateSelectorRound').daterangepicker({
+
+    }, function (start, end, label) {
+    });
+
+
+}
+
+function AddFlightForTwo() {
+    WhichAddFlightInOneorTwo = "two"
+    document.getElementById("FlightsBlock").innerHTML = ""
+    let FromTwoWay = document.getElementById("FromTwoWay").value;
+    let ToTwoWay = document.getElementById("ToTwoWay").value;
+    let DateTwoWay = document.getElementById("DateTwoWay").value;
+    let Time1stTwoWay = document.getElementById("Time1stTwoWay").value;
+    let Time2ndTwoWay = document.getElementById("Time2ndTwoWay").value;
+    let PassengerTwoWay = document.getElementById("PassengerTwoWay").value;
+
+    if (!FromTwoWay || !ToTwoWay || !DateTwoWay || !Time1stTwoWay || !Time2ndTwoWay || !PassengerTwoWay) {
+        // return alert("Please Fill all fields")
+
+    }
+
+    let DataArr = sessionStorage.getItem("DataArr");
+
+    if (DataArr) {
+        DataArr = JSON.parse(DataArr);
+        DataArr = Object.values(DataArr);
+        DataArr = [...DataArr, ["TwoWay", FromTwoWay, ToTwoWay, DateTwoWay, Time1stTwoWay, Time2ndTwoWay, PassengerTwoWay]]
+    } else {
+        DataArr = [["TwoWay", FromTwoWay, ToTwoWay, DateTwoWay, Time1stTwoWay, Time2ndTwoWay, PassengerTwoWay]]
+
+    }
+
+    DataArr = JSON.stringify(DataArr);
+    sessionStorage.setItem("DataArr", DataArr);
+
+    ShowRecentlyAddedFlights()
+}
+
+function ShowOnScreenFlightsForTwo(way, From, To, DateTwoWay, Time1stTwoWay, Time2ndTwoWay, Passenger, index) {
+
+    let date = new Date();
+    date = date.getMilliseconds()
+
+    let data = `<div class="row MainBox mt-3">
+
+    <div class="col-sm col-sm-2.5 FromDivBorder">
+
+        <span class="SvgIcon">
+            <svg width="calc(20px + 0.9vw)" height="calc(20px + 0.9vw)" viewBox="0 0 36 36" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M3.78004 28.0725H32.28V31.0725H3.78004V28.0725ZM33.135 14.0325C32.82 12.8325 31.575 12.1125 30.375 12.4425L22.41 14.5725L12.06 4.9275L9.16504 5.6925L15.375 16.4475L7.92004 18.4425L4.96504 16.1325L2.79004 16.7175L6.67504 23.4525L31.53 16.8075C32.745 16.4625 33.45 15.2325 33.135 14.0325Z"
+                    fill="#878787"></path>
+            </svg>
+        </span>
+
+        <span class="autocomplete">
+
+            <input type="text" placeholder="From" value="${From}" class="FromPlace "
+                oninput="SearchAirports(this)" >
+        </span>
+
+    </div>
+
+    <div class="col-sm col-sm-2.5 FromDivBorder">
+        <span class="SvgIcon">
+            <svg width="calc(17px + 0.9vw)" height="calc(17px + 0.9vw)" viewBox="0 0 30 30" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M0.75 26.25H29.25V29.25H0.75V26.25ZM26.01 21.525C27.21 21.84 28.44 21.135 28.77 19.935C29.085 18.735 28.38 17.505 27.18 17.175L19.215 15.045L15.075 1.515L12.18 0.75V13.17L4.725 11.175L3.33 7.695L1.155 7.11V14.865L26.01 21.525Z"
+                    fill="#878787"></path>
+            </svg>
+        </span>
+
+        <span class="autocomplete">
+            <input type="text" placeholder="To" value="${To}" class="ToPlace" oninput="SearchAirports(this)"
+            >
+        </span>
+    </div>
+
+    <div class="col-sm col-sm-4 FromDivBorder DateDivBorder DateDivBorderRound">
+        <div>
+            <input name="datetimes" class="DateSelectorRound" value="${DateTwoWay}" placeholder="Date">
+        </div>
+
+        <div class="row">
+            <div class=" col-6 DividerForRound">
+                <select name="" id="${date}Time1" class="AutoShowTime">
+                    <option value="00:00">00:00</option>
+                    <option value="00:30">00:30</option>
+                    <option value="01:00">01:00</option>
+                    <option value="01:30">01:30</option>
+
+                    <option value="02:00">02:00</option>
+                    <option value="02:30">02:30</option>
+                    <option value="03:00">03:00</option>
+                    <option value="03:30">03:30</option>
+
+                    <option value="04:00">04:00</option>
+                    <option value="04:30">04:30</option>
+                    <option value="05:00">05:00</option>
+                    <option value="05:30">05:30</option>
+
+                    <option value="06:00">06:00</option>
+                    <option value="06:30">06:30</option>
+                    <option value="07:00">07:00</option>
+                    <option value="07:30">07:30</option>
+
+                    <option value="08:00">08:00</option>
+                    <option value="08:30">08:30</option>
+                    <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
+
+
+                    <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
+                    <option value="11:00">11:00</option>
+                    <option value="11:30">11:30</option>
+
+                    <option value="12:00">12:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="13:30">13:30</option>
+
+
+                    <option value="14:00">14:00</option>
+                    <option value="14:30">14:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="15:30">15:30</option>
+
+                    <option value="16:00">16:00</option>
+                    <option value="16:30">16:30</option>
+                    <option value="17:00">17:00</option>
+                    <option value="17:30">17:30</option>
+
+
+                    <option value="18:00">18:00</option>
+                    <option value="18:30">18:30</option>
+                    <option value="19:00">19:00</option>
+                    <option value="19:30">19:30</option>
+
+                    <option value="20:00">20:00</option>
+                    <option value="20:30">20:30</option>
+                    <option value="21:00">21:00</option>
+                    <option value="21:30">21:30</option>
+
+
+                    <option value="22:00">22:00</option>
+                    <option value="22:30">22:30</option>
+                    <option value="23:00">23:00</option>
+                    <option value="23:30">23:30</option>
+
+                </select>
+            </div>
+            <div class="col-6">
+                <select name="" id="${date}Time2" class="AutoShowTime">
+                    <option value="00:00">00:00</option>
+                    <option value="00:30">00:30</option>
+                    <option value="01:00">01:00</option>
+                    <option value="01:30">01:30</option>
+
+                    <option value="02:00">02:00</option>
+                    <option value="02:30">02:30</option>
+                    <option value="03:00">03:00</option>
+                    <option value="03:30">03:30</option>
+
+                    <option value="04:00">04:00</option>
+                    <option value="04:30">04:30</option>
+                    <option value="05:00">05:00</option>
+                    <option value="05:30">05:30</option>
+
+                    <option value="06:00">06:00</option>
+                    <option value="06:30">06:30</option>
+                    <option value="07:00">07:00</option>
+                    <option value="07:30">07:30</option>
+
+                    <option value="08:00">08:00</option>
+                    <option value="08:30">08:30</option>
+                    <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
+
+
+                    <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
+                    <option value="11:00">11:00</option>
+                    <option value="11:30">11:30</option>
+
+                    <option value="12:00">12:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="13:30">13:30</option>
+
+
+                    <option value="14:00">14:00</option>
+                    <option value="14:30">14:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="15:30">15:30</option>
+
+                    <option value="16:00">16:00</option>
+                    <option value="16:30">16:30</option>
+                    <option value="17:00">17:00</option>
+                    <option value="17:30">17:30</option>
+
+
+                    <option value="18:00">18:00</option>
+                    <option value="18:30">18:30</option>
+                    <option value="19:00">19:00</option>
+                    <option value="19:30">19:30</option>
+
+                    <option value="20:00">20:00</option>
+                    <option value="20:30">20:30</option>
+                    <option value="21:00">21:00</option>
+                    <option value="21:30">21:30</option>
+
+
+                    <option value="22:00">22:00</option>
+                    <option value="22:30">22:30</option>
+                    <option value="23:00">23:00</option>
+                    <option value="23:30">23:30</option>
+
+                </select>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="col-sm col-sm-2 PassengerDivBorder" onclick="OpenSelect('${date}Passenger')">
+
+        <div style="display: inline-block;
+        margin-left: 36%;">
+
+            <span class="SvgIcon">
+                <svg width="calc(13px + 0.729vw)" height="calc(13px + 0.729vw)" viewBox="0 0 28 28" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M14 3.5C15.925 3.5 17.5 5.075 17.5 7C17.5 8.925 15.925 10.5 14 10.5C12.075 10.5 10.5 8.925 10.5 7C10.5 5.075 12.075 3.5 14 3.5ZM14 21C18.725 21 24.15 23.2575 24.5 24.5H3.5C3.9025 23.24 9.2925 21 14 21ZM14 0C10.1325 0 7 3.1325 7 7C7 10.8675 10.1325 14 14 14C17.8675 14 21 10.8675 21 7C21 3.1325 17.8675 0 14 0ZM14 17.5C9.3275 17.5 0 19.845 0 24.5V28H28V24.5C28 19.845 18.6725 17.5 14 17.5Z"
+                        fill="#0E2137"></path>
+                </svg>
+            </span>
+            <select name="" id="${date}Passenger" class="PassengerSelect">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+            </select>
+        </div>
+        <div class="PassangerDiv">Passenger</div>
+
+    </div>
+
+    <div class="col-sm col-sm-1 DeleteBtnDiv">
+        <button class="DeleteBtn" onclick="DeleteFlightBlock(${index})"><svg class="svgDelete" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+      </svg></button>
+    </div>
+
+
+</div>
+`
+
+
+    $('#FlightsBlock').append(data);
+    // document.getElementById("FlightsBlock").innerHTML += data
+    document.getElementById(`${date}Passenger`).value = Passenger
+    document.getElementById(`${date}Time1`).value = Time1stTwoWay
+    document.getElementById(`${date}Time2`).value = Time2ndTwoWay
+
+    $('.PassengerSelect').select2();
+    $('.AutoShowTime').select2();
+    $('.DateSelector').daterangepicker({
+        "singleDatePicker": true,
+        "showDropdowns": true,
+    }, function (start, end, label) {
+    });
+
+    $('.DateSelectorRound').daterangepicker({
+
+    }, function (start, end, label) {
+    });
+
+
+}
+
+function DeleteFlightBlock(index) {
+    let DataArr = sessionStorage.getItem("DataArr");
+
+    if (!DataArr) {
+        return
+    }
+
+    DataArr = JSON.parse(DataArr);
+    DataArr = Object.values(DataArr);
+
+    DataArr.splice(index, 1)
+
+    DataArr = JSON.stringify(DataArr);
+    sessionStorage.setItem("DataArr", DataArr);
+    document.getElementById("FlightsBlock").innerHTML = ""
+
+    ShowRecentlyAddedFlights()
+}
+
+function OpenSelect(id) {
+    id = "#" + id
+    console.log(id);
+    $(id).select2('open');
+
+}
+
+function Yes() {
+    document.getElementById("QuestionInContact").style.display = "none"
+    document.getElementById("AnswerInContact").style.display = "block"
+}
+
+function No() {
+    document.getElementById("QuestionInContact").style.display = "none"
+    document.getElementById("AnswerInContact").style.display = "none"
+}
+let WhichAddFlightInOneorTwo = "one"
+
+function GetAQuoteForTwo() {
+    let FromTwoWay = document.getElementById("FromTwoWay").value;
+    let ToTwoWay = document.getElementById("ToTwoWay").value;
+    let DateTwoWay = document.getElementById("DateTwoWay").value;
+    let Time1stTwoWay = document.getElementById("Time1stTwoWay").value;
+    let Time2ndTwoWay = document.getElementById("Time2ndTwoWay").value;
+    let PassengerTwoWay = document.getElementById("PassengerTwoWay").value;
+
+    if (!FromTwoWay || !ToTwoWay || !DateTwoWay || !Time1stTwoWay || !Time2ndTwoWay || !PassengerTwoWay) {
+        return alert("Please Fill all fields")
+
+    }
+
+    let DataArr
+    DataArr = [["TwoWay", FromTwoWay, ToTwoWay, DateTwoWay, Time1stTwoWay, Time2ndTwoWay, PassengerTwoWay]]
+
+    DataArr = JSON.stringify(DataArr);
+    sessionStorage.setItem("DataArr", DataArr);
+
+    WhichAddFlightInOneorTwo = "two"
+
+    document.getElementById("OneWay").style.display = "none"
+    document.getElementById("RoundTrip").style.display = "none"
+
+    document.getElementById("ContactForm").style.display = "block"
+}
+
+function GetAQuoteForOne() {
+
+    let From = document.getElementById("FromOneWay").value;
+    let To = document.getElementById("ToOneWay").value;
+    let DateOneWay = document.getElementById("DateOneWay").value;
+    let Time = document.getElementById("TimeOneWay").value;
+    let Passenger = document.getElementById("PassengerOneWay").value;
+
+    if (!From || !To || !DateOneWay || !Time || !Passenger) {
+        return alert("Please Fill all fields")
+
+    }
+
+    let DataArr
+    DataArr = [["OneWay", From, To, DateOneWay, Time, Passenger]]
+
+    DataArr = JSON.stringify(DataArr);
+    sessionStorage.setItem("DataArr", DataArr);
+
+    WhichAddFlightInOneorTwo = "one"
+
+    document.getElementById("OneWay").style.display = "none"
+    document.getElementById("RoundTrip").style.display = "none"
+
+    document.getElementById("ContactForm").style.display = "block"
+}
+
+function CloseContactForm() {
+    document.getElementById("OneWay").style.display = "block"
+    document.getElementById("RoundTrip").style.display = "none"
+    sessionStorage.removeItem("DataArr")
+
+    document.getElementById("ContactForm").style.display = "none"
+}
+
+function AddFlightForHomepageOne() {
+    document.getElementById("FlightsBlock").innerHTML = ""
+    let From = document.getElementById("FromOneWay").value;
+    let To = document.getElementById("ToOneWay").value;
+    let DateOneWay = document.getElementById("DateOneWay").value;
+    let Time = document.getElementById("TimeOneWay").value;
+    let Passenger = document.getElementById("PassengerOneWay").value;
+
+    if (!From || !To || !DateOneWay || !Time || !Passenger) {
+        return alert("Please Fill all fields")
+
+    }
+
+    let DataArr
+    DataArr = [["OneWay", From, To, DateOneWay, Time, Passenger]]
+
+    DataArr = JSON.stringify(DataArr);
+    sessionStorage.setItem("DataArr", DataArr);
+
+    OpenLink("https://top-jet.us/get-a-quote/")
+    // window.location.href = "./quote";
+}
+
+function OpenLink(url) {
+
+    const link = document.createElement('a')
+
+    link.setAttribute('href', url)
+    link.setAttribute('target', "_blank")
+    link.style.display = 'none'
+
+    document.body.appendChild(link)
+
+    link.click()
+}
+function AddFlightForHomepageTwo() {
+    let FromTwoWay = document.getElementById("FromTwoWay").value;
+    let ToTwoWay = document.getElementById("ToTwoWay").value;
+    let DateTwoWay = document.getElementById("DateTwoWay").value;
+    let Time1stTwoWay = document.getElementById("Time1stTwoWay").value;
+    let Time2ndTwoWay = document.getElementById("Time2ndTwoWay").value;
+    let PassengerTwoWay = document.getElementById("PassengerTwoWay").value;
+
+    if (!FromTwoWay || !ToTwoWay || !DateTwoWay || !Time1stTwoWay || !Time2ndTwoWay || !PassengerTwoWay) {
+        return alert("Please Fill all fields")
+
+    }
+
+    let DataArr
+    DataArr = [["TwoWay", FromTwoWay, ToTwoWay, DateTwoWay, Time1stTwoWay, Time2ndTwoWay, PassengerTwoWay]]
+
+    DataArr = JSON.stringify(DataArr);
+    sessionStorage.setItem("DataArr", DataArr);
+
+    window.location.href = "./quote";
+
+}
+
+async function SubmitQuote() {
+    let Fname = document.querySelectorAll(".form-inputs")[0].value
+    let Lname = document.querySelectorAll(".form-inputs")[1].value
+    let Email = document.querySelectorAll(".form-inputs")[2].value
+    let Phone = document.querySelectorAll(".form-inputs")[3].value
+    let Prefereed = document.querySelectorAll(".form-inputs")[4].value
+    let Note = document.querySelectorAll(".form-inputs")[5].value
+
+    if (!Fname || !Lname || !Email || !Phone) {
+        return alert("Please Fill all fields")
+    }
+
+    let date = Date(Date.now());
+    date = date.toString();
+
+    let contactInfo = { Fname, Lname, Email, Phone, Prefereed, Note, date }
+
+    let DataArr = sessionStorage.getItem("DataArr");
+    DataArr = JSON.parse(DataArr);
+    DataArr = Object.values(DataArr);
+
+    document.getElementById("loading").style.display = "block"
+
+
+    let Data = await fetch(`${API}/get-quote`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "flight": DataArr,
+            "contact": contactInfo
+        })
+    })
+
+    Data = await Data.text();
+
+    if (Data == "Error") {
+        document.getElementById("loading").style.display = "none"
+        return alert("Sorry, Your request not send at this time. Please try Again...")
+    }
+
+    document.getElementById("loading").style.display = "none"
+    document.getElementById("ContactForm").style.display = "none"
+    sessionStorage.removeItem("DataArr")
+    document.getElementById("ThankYouPage").style.display = "block"
+
+}
+
+function GoToHome() {
+    window.location.href = "./";
+}
+
+
+$('.DateSelector').daterangepicker({
+    "singleDatePicker": true,
+    "showDropdowns": true,
+}, function (start, end, label) {
+});
+
+$('.DateSelectorRound').daterangepicker({
+    "locale": {
+        "format": "MM/DD/YYYY",
+        "separator": " - ",
+        "applyLabel": "Apply",
+        "cancelLabel": "Cancel",
+        "fromLabel": "From",
+        "toLabel": "To",
+        "customRangeLabel": "Custom",
+        "weekLabel": "W",
+        "daysOfWeek": [
+            "Su",
+            "Mo",
+            "Tu",
+            "We",
+            "Th",
+            "Fr",
+            "Sa"
+        ],
+        "monthNames": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ],
+        "firstDay": 1
+    },
+}, function (start, end, label) {
+});
+
+
+
+$(document).ready(function () {
+    $('.PassengerSelect').select2();
+    $('.AutoShowTime').select2();
+
+});
+
+
+setInterval(()=>{
+    getBodyHeight()
+}
+, 500);
+
+function getBodyHeight() {
+    var offsetHeight = document.getElementById('getHeight').offsetHeight;
+
+    sessionStorage.setItem("FinderbodyHeight", offsetHeight)
+
+}
+    </script>
+</body>
+
+</html>
