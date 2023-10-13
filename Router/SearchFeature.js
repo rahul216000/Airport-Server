@@ -9,12 +9,26 @@ router.post("/", async (req, res) => {
     let query = req.body.query;
     let count = req.body.count;
     try {
-        let FilteredCity = await CityNameByQuery(query)
-        let FilterAirportsAndNumberofCities = await AirportsNameByCity(FilteredCity)
-        let FilterAirports = FilterAirportsAndNumberofCities[0]
-        let NumberOnCities = FilterAirportsAndNumberofCities[1]
+        // query = query.charAt(0).toUpperCase() + query.slice(1);
 
-        res.json({ countNo: count, CityArray: FilteredCity, AirportsArr: FilterAirports, NumberOnCitiesArr: NumberOnCities });
+        query = query.split(" ");
+
+        for (let i = 0; i < query.length; i++) {
+            query[i] = query[i][0].toUpperCase() + query[i].substr(1);
+        }
+
+        query = query.join(" ");
+
+
+        // let FilteredCity = await CityNameByQuery(query)
+        // let FilterAirportsAndNumberofCities = await AirportsNameByCity(FilteredCity)
+        // let NumberOnCities = FilterAirportsAndNumberofCities[1]
+
+        // let FilterAirports = FilterAirportsAndNumberofCities[0]
+        let FilterAirports = await Mediator(query)
+
+        // res.json({ countNo: count, AirportsArr: FilterAirports});
+        res.json({ countNo: count, CityArray: [query], AirportsArr: FilterAirports, NumberOnCitiesArr: [1] });
 
     } catch (error) {
         console.log(error);
@@ -73,9 +87,13 @@ async function AirportsNameByCity(arr) {
 
 async function Mediator(CityName) {
     let LineForCity = await LineForCityFn(CityName)
+    if (LineForCity == 0) {
+        return []
+    }
     let AirpotsArr = await FindNthLine(LineForCity, "Airports.txt")
     AirpotsArr = AirpotsArr.split(",");
     AirpotsArr.pop()
+    AirpotsArr = AirpotsArr.slice(0, 10)
     return AirpotsArr
 }
 
