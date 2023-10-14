@@ -12,7 +12,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors({
     origin: [
         // 'http://127.0.0.1:5500',
-        'https://airport-form.netlify.app'
+        'https://airport-form.netlify.app',
+        'https://top-jet.us'
     ]
 }));
 
