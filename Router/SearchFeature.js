@@ -9,8 +9,6 @@ router.post("/", async (req, res) => {
     let query = req.body.query;
     let count = req.body.count;
     try {
-        // query = query.charAt(0).toUpperCase() + query.slice(1);
-
         query = query.split(" ");
 
         for (let i = 0; i < query.length; i++) {
@@ -20,14 +18,7 @@ router.post("/", async (req, res) => {
         query = query.join(" ");
 
 
-        // let FilteredCity = await CityNameByQuery(query)
-        // let FilterAirportsAndNumberofCities = await AirportsNameByCity(FilteredCity)
-        // let NumberOnCities = FilterAirportsAndNumberofCities[1]
-
-        // let FilterAirports = FilterAirportsAndNumberofCities[0]
         let FilterAirports = await Mediator(query)
-
-        // res.json({ countNo: count, AirportsArr: FilterAirports});
         res.json({ countNo: count, CityArray: [query], AirportsArr: FilterAirports, NumberOnCitiesArr: [1] });
 
     } catch (error) {
