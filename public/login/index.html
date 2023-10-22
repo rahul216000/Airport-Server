@@ -20,6 +20,35 @@
 	</div>
 
 	<script>
+		verify()
+        async function verify() {
+            let token = localStorage.getItem("token")
+            if (!token) {
+                return
+            }
+
+            let VerifyToken = await fetch(`/verify`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "token": token
+
+                })
+            })
+
+            VerifyToken = await VerifyToken.text();
+
+            if (VerifyToken != "Verified") {
+                return
+            } else {
+                window.location.href = "/dashboard";
+            }
+
+        }
+
 		async function Login() {
 			let email = document.getElementById("email").value
 			let Password = document.getElementById("Password").value
@@ -47,6 +76,8 @@
 				localStorage.setItem("token", Data.token)
 				window.location.href = "/dashboard";
 
+			}else{
+				alert("Wrong Credentials")
 			}
 
 		}

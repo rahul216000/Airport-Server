@@ -49,10 +49,6 @@ router.post("/get-quote", async (req, res) => {
                 th {
                     background-color: #f2f2f2;
                 }
-                img {
-                    max-width: 100%;
-                    height: auto;
-                }
                 .container {
                     max-width: 600px;
                     margin: 0 auto;
@@ -77,10 +73,15 @@ router.post("/get-quote", async (req, res) => {
                     border-radius: 5px;
                     margin-top: 20px;
                 }
+                .logoImg{
+                    width:320;
+                    height:163;
+                }
             </style>
         </head>
         <body>
             <div class="container">
+            <p> <img  src="https://i.ibb.co/4WW11jw/topjet.jpg" width="320" height="163" alt="Company Logo"></p>
                 <h1>Dear ${Fname},</h1>
                 <p>Thank you for choosing TopJet for your private charter inquiry - we are excited to assist you in planning your upcoming journey.</p>
                 <p>Your dedicated jet expert will be in touch with you shortly. They will discuss your requirements in detail and present you with a range of options tailored to your preferences, schedule, and budget.</p>
@@ -88,7 +89,6 @@ router.post("/get-quote", async (req, res) => {
                 <p>We look forward to serving you and ensuring your private charter experience is nothing short of extraordinary.</p>
                 <p>Safe travels and warm regards,</p>
                 <p>The TopJet Team</p>
-                <p> <img src="https://airport-server.onrender.com/Topjet-logo.jpeg" alt="Company Logo"></p>
                 <p>+1 (561) TOPJET-1</p>
                 <p>sales.us@topjet.aero</p>
                 <p>www.topjet.aero</p>

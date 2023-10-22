@@ -26,9 +26,6 @@ app.use(require('./Router/Admin'));
 // Francesca.smith@topjet.aero
 // Topjet2023!
 
-// francescasmith
-// HhDLkTtKB7iUos5r
-
 app.listen(PORT, (error) => {
     if (!error) {
         console.log("Server is Successfully Running, and App is listening on port " + PORT)
