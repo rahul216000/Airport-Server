@@ -11,7 +11,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors({
     origin: [
-        // 'http://127.0.0.1:5500',
         'https://airport-form.netlify.app',
         'https://top-jet.us'
     ]
@@ -22,9 +21,6 @@ app.use(require('./Router/SearchFeature'));
 app.use(require('./Router/RequestFeature'));
 app.use(require('./Router/Admin'));
 
-
-// Francesca.smith@topjet.aero
-// Topjet2023!
 
 app.listen(PORT, (error) => {
     if (!error) {

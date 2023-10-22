@@ -81,7 +81,7 @@ router.post("/get-quote", async (req, res) => {
         </head>
         <body>
             <div class="container">
-            <p> <img  src="https://i.ibb.co/4WW11jw/topjet.jpg" width="320" height="163" alt="Company Logo"></p>
+            <p> <img  src="https://airport-server.onrender.com/topjet.jpg" width="320" height="163" alt="Company Logo"></p>
                 <h1>Dear ${Fname},</h1>
                 <p>Thank you for choosing TopJet for your private charter inquiry - we are excited to assist you in planning your upcoming journey.</p>
                 <p>Your dedicated jet expert will be in touch with you shortly. They will discuss your requirements in detail and present you with a range of options tailored to your preferences, schedule, and budget.</p>
