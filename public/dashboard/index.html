@@ -745,6 +745,10 @@
                 <nav class="header-navigation-links">
                     <a href="/dashboard"> Dashboard </a>
                 </nav>
+                
+                <nav class="header-navigation-links" style="cursor: pointer;">
+                    <a onclick="logout()"> Logout </a>
+                </nav>
 
             </div>
 
@@ -787,6 +791,10 @@
 
     <script>
 
+        function logout(){
+            localStorage.removeItem("token")
+            window.location.href = "/login";
+        }
         verify()
         async function verify() {
             let token = localStorage.getItem("token")

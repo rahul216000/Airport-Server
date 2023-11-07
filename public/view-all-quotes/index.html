@@ -746,6 +746,10 @@
                     <a href="/dashboard"> Dashboard </a>
                 </nav>
 
+                <nav class="header-navigation-links" style="cursor: pointer;">
+                    <a onclick="logout()"> Logout </a>
+                </nav>
+
             </div>
 
         </div>
@@ -758,7 +762,7 @@
                     <div class="vertical-tabs">
 
                         <a href="/dashboard">Recent Quotes</a>
-                        <a href="/view-all-quotes"  class="active">View All Quotes</a>
+                        <a href="/view-all-quotes" class="active">View All Quotes</a>
                     </div>
                 </div>
 
@@ -787,6 +791,10 @@
 
     <script>
 
+        function logout() {
+            localStorage.removeItem("token")
+            window.location.href = "/login";
+        }
         verify()
         async function verify() {
             let token = localStorage.getItem("token")
@@ -863,7 +871,7 @@
 
         }
 
-        function ViewThisQuote(id){
+        function ViewThisQuote(id) {
             sessionStorage.setItem("currentQuote", id)
             window.location.href = "/quote";
         }

@@ -805,6 +805,10 @@
                     <a href="/dashboard"> Dashboard </a>
                 </nav>
 
+                <nav class="header-navigation-links" style="cursor: pointer;">
+                    <a onclick="logout()"> Logout </a>
+                </nav>
+
             </div>
 
         </div>
@@ -823,7 +827,7 @@
 
                 <div class="content-main">
                     <div class="card-grid">
-                        <main class="SecondMain"  id="DataSets">
+                        <main class="SecondMain" id="DataSets">
                             <figure class="wrapper">
                                 <table>
                                     <tbody>
@@ -865,7 +869,10 @@
     </main>
 
     <script>
-
+        function logout() {
+            localStorage.removeItem("token")
+            window.location.href = "/login";
+        }
         verify()
         async function verify() {
             let token = localStorage.getItem("token")
@@ -990,7 +997,7 @@
                                     
 </table></figure>`
 
-                }else{
+                } else {
                     tempelate += ` <figure class="wrapper"><table>
                                     <tbody>
                                         <tr>
