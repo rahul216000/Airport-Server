@@ -17,9 +17,10 @@ router.post("/", async (req, res) => {
 
         query = query.join(" ");
 
+        let cityName  = await CityNameByQuery(query)
 
-        let FilterAirports = await Mediator(query)
-        res.json({ countNo: count, CityArray: [query], AirportsArr: FilterAirports, NumberOnCitiesArr: [1] });
+        let FilterAirports = await Mediator(cityName)
+        res.json({ countNo: count, CityArray: [cityName], AirportsArr: FilterAirports, NumberOnCitiesArr: [1] });
 
     } catch (error) {
         console.log(error);
@@ -42,7 +43,7 @@ async function CityNameByQuery(query) {
             FilteredCityArr.push(CityArr[i])
         }
     }
-    FilteredCityArr = FilteredCityArr.slice(0, 5)
+    FilteredCityArr = FilteredCityArr[0]
     return FilteredCityArr
 }
 
